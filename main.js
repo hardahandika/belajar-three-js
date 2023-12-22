@@ -155,7 +155,7 @@ function populateSphere() {
 }
 
 //HUD
-function createHud(center, scale, texturePath) {
+function createHud(center, scale, position, texturePath) {
     const texture = textureLoader.load(texturePath);
 
     const material = new THREE.SpriteMaterial({ map: texture });
@@ -163,14 +163,35 @@ function createHud(center, scale, texturePath) {
     const hud = new THREE.Sprite(material);
     hud.center.set(center.x, center.y);
     hud.scale.set(scale.x * 0.5, scale.y * 0.5, 1);
-    hud.position.set(-900, 400);
+    hud.position.set(position.x, position.y);
     return hud;
 }
 
 function populateHud() {
-    let hudFloor = new createHud(new THREE.Vector2(0, 0), new THREE.Vector2(216, 90), 'textures/ui_images/floor title bg guide.png');
+    let hudFloor = new createHud(
+        new THREE.Vector2(0, 0),
+        new THREE.Vector2(216, 90),
+        new THREE.Vector2(-900, 400),
+        'textures/ui_images/floor title bg guide.png'
+    );
+
+    let hudLokasiIcon = new createHud(
+        new THREE.Vector2(0, 0),
+        new THREE.Vector2(90, 90),
+        new THREE.Vector2(-900, 350),
+        'textures/ui_images/lokasi icon.png'
+    )
+
+    let hudLokasiBG = new createHud(
+        new THREE.Vector2(0, 0),
+        new THREE.Vector2(139, 90),
+        new THREE.Vector2(-855, 350),
+        'textures/ui_images/name.png'
+    )
 
     sceneOrtho.add(hudFloor);
+    sceneOrtho.add(hudLokasiIcon);
+    sceneOrtho.add(hudLokasiBG);
 }
 
 //FUNC TO CREATE INDIVIDUAL POI
